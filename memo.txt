@@ -1,0 +1,47 @@
+rails generate model
+
+
+HTML5 canvas? opacity(sprite image?)
+
+
+Lan->Hub->Computer
+        ->Hub->Hub->Computer
+
+#Cable
+#  from_id connector
+#  to_id   connector
+#  points  [0.0,0.0] -> [] ... [] ->[1.0,1.0]
+Connector
+  belongs_to :hub
+Adapter < Connector
+  ip :string
+  netmask :integer
+  #belongs_to :lan (type: lan or hub?)
+  belongs_to :computer
+Hub
+  has_many :connectors #8
+  belongs_to :lan
+Computer
+  has_many :adapters #2
+Room
+  has_many :computers
+  has_many :hubs
+Lan
+  ip :string
+  netmask :integer (auto)
+  has_many :adapters
+  has_many :hubs
+
+User
+  has_many reports
+Question
+  set room,lan,computer,hub,adapter,connector,cable
+Report
+  cp question and edit
+  has_many **s
+
+Lan.netmask_check(subnetmask_check) .adapters
+connects_loop_check(dup hub)
+
+#config
+#ActiveFile? ActiveYaml?
